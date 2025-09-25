@@ -31,8 +31,8 @@ def home(request):
             processed = process_text(text)
             return render(
                 request=request,
-                template_name="processor/result.html",
-                context={"result": processed}
+                template_name="processor/output.html",
+                context={"output": processed}
             )
     else:
         form = UploadFileForm()
