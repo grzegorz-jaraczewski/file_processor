@@ -2,14 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Text processing</title>
+    <title>Text File Processor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset defaults */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        /* Hide default file input */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Custom file upload button */
+        .custom-file-upload {
+            display: inline-block;
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #2980b9;
+        }
+
+        /* Submit button */
+        button[type="submit"] {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #27ae60;
+        }
+
+        /* Show selected file name */
+        #file-name {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload the text file</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Send</button>
-    </form>
+    <div class="container">
+        <h1>Upload a Text File</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Custom file input -->
+            <label class="custom-file-upload">
+                Choose File
+                {{ form.file }}
+            </label>
+            <span id="file-name">No file selected</span>
+
+            <button type="submit">Process</button>
+        </form>
+    </div>
+
+    <script>
+        const fileInput = document.querySelector('input[type="file"]');
+        const fileName = document.getElementById('file-name');
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = fileInput.files[0].name;
+            } else {
+                fileName.textContent = 'No file selected';
+            }
+        });
+    </script>
 </body>
 </html>

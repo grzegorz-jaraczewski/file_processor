@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from forms import UploadFileForm
-from utils import process_text
+from .forms import UploadFileForm
+from .utils import process_text
 
 
 def home(request):

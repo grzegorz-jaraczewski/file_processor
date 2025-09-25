@@ -13,6 +13,5 @@ class UploadFileForm(forms.Form):
     """
 
     file = forms.FileField(
-        label="Choose the text file: ",
-        help_text="Upload a .txt file that you want to process."
+        label="Choose text file"
     )
